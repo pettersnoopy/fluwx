@@ -29,13 +29,15 @@ const String _messageAction = "messageAction";
 
 ///Base Class for Sharing
 abstract class WeChatShareModel {
+  final String appId;
   final String messageExt;
   final String messageAction;
   final String mediaTagName;
   final WeChatScene scene;
 
   WeChatShareModel(
-      {this.messageExt,
+      {this.appId,
+      this.messageExt,
       this.messageAction,
       this.mediaTagName,
       this.scene: WeChatScene.SESSION});
@@ -56,12 +58,14 @@ class WeChatShareTextModel extends WeChatShareModel {
       {String text,
       String transaction,
       WeChatScene scene,
+      String appId,
       String messageExt,
       String messageAction,
       String mediaTagName})
       : this.text = text ?? "",
         this.transaction = transaction ?? "text",
         super(
+            appId: appId,
             mediaTagName: mediaTagName,
             messageAction: messageAction,
             messageExt: messageExt,
@@ -71,6 +75,7 @@ class WeChatShareTextModel extends WeChatShareModel {
   Map toMap() {
     return {
       "text": text,
+      "appId": appId,
       _transaction: transaction,
       _scene: scene.toString(),
       _messageExt: messageExt,
@@ -115,6 +120,7 @@ class WeChatShareMiniProgramModel extends WeChatShareModel {
       this.thumbnail,
       this.withShareTicket: false,
       this.hdImagePath,
+      String appId,
       String transaction,
       WeChatScene scene,
       String messageExt,
@@ -122,10 +128,12 @@ class WeChatShareMiniProgramModel extends WeChatShareModel {
       String mediaTagName})
       : this.transaction = transaction ?? "miniProgram",
         this.miniProgramType = miniProgramType ?? WXMiniProgramType.RELEASE,
+        assert(appId != null && appId.isNotEmpty),
         assert(webPageUrl != null && webPageUrl.isNotEmpty),
         assert(userName != null && userName.isNotEmpty),
         assert(path != null && path.isNotEmpty),
         super(
+            appId: appId,
             mediaTagName: mediaTagName,
             messageAction: messageAction,
             messageExt: messageExt,
@@ -140,6 +148,7 @@ class WeChatShareMiniProgramModel extends WeChatShareModel {
       "path": path,
       "title": title,
       "description": description,
+      "appId": appId,
       _transaction: transaction,
       _scene: scene.toString(),
       _thumbnail: thumbnail,
@@ -167,11 +176,14 @@ class WeChatShareImageModel extends WeChatShareModel {
       String messageExt,
       String messageAction,
       String mediaTagName,
+      String appId,
       this.title})
       : this.transaction = transaction ?? "text",
         this.thumbnail = thumbnail ?? "",
         assert(image != null),
+        assert(appId != null && appId.isNotEmpty),
         super(
+            appId: appId,
             mediaTagName: mediaTagName,
             messageAction: messageAction,
             messageExt: messageExt,
@@ -183,6 +195,7 @@ class WeChatShareImageModel extends WeChatShareModel {
       _transaction: transaction,
       _scene: scene.toString(),
       "image": image,
+      "appId": appId,
       _thumbnail: thumbnail,
       _mediaTagName: mediaTagName,
       _messageAction: messageAction,
@@ -213,6 +226,7 @@ class WeChatShareMusicModel extends WeChatShareModel {
     this.description: "",
     this.musicDataUrl,
     this.musicLowBandDataUrl,
+    String appId,
     String thumbnail,
     WeChatScene scene,
     String messageExt,
@@ -221,7 +235,9 @@ class WeChatShareMusicModel extends WeChatShareModel {
   })  : this.transaction = transaction ?? "text",
         this.thumbnail = thumbnail ?? "",
         assert(musicUrl != null || musicLowBandUrl != null),
+        assert(appId != null && appId.isNotEmpty),
         super(
+            appId: appId,
             mediaTagName: mediaTagName,
             messageAction: messageAction,
             messageExt: messageExt,
@@ -232,6 +248,7 @@ class WeChatShareMusicModel extends WeChatShareModel {
     return {
       _transaction: transaction,
       _scene: scene.toString(),
+      "appId": appId,
       "musicUrl": musicUrl,
       "musicDataUrl": musicDataUrl,
       "musicLowBandUrl": musicLowBandUrl,
@@ -271,11 +288,14 @@ class WeChatShareVideoModel extends WeChatShareModel {
     this.messageExt,
     this.messageAction,
     this.mediaTagName,
+    String appId,
   })  : this.transaction = transaction ?? "text",
         this.thumbnail = thumbnail ?? "",
+        assert(appId != null && appId.isNotEmpty),
         assert(videoUrl != null || videoLowBandUrl != null),
         assert(thumbnail != null),
         super(
+            appId: appId,
             mediaTagName: mediaTagName,
             messageAction: messageAction,
             messageExt: messageExt,
@@ -286,6 +306,7 @@ class WeChatShareVideoModel extends WeChatShareModel {
     return {
       _transaction: transaction,
       _scene: scene.toString(),
+      "appId": appId,
       "videoUrl": videoUrl,
       "videoLowBandUrl": videoLowBandUrl,
       _thumbnail: thumbnail,
@@ -315,10 +336,13 @@ class WeChatShareWebPageModel extends WeChatShareModel {
     String messageExt,
     String messageAction,
     String mediaTagName,
+    String appId,
   })  : this.transaction = transaction ?? "text",
         assert(webPage != null),
         assert(thumbnail != null),
+        assert(appId != null && appId.isNotEmpty),
         super(
+            appId: appId,
             mediaTagName: mediaTagName,
             messageAction: messageAction,
             messageExt: messageExt,
@@ -329,6 +353,7 @@ class WeChatShareWebPageModel extends WeChatShareModel {
     return {
       _transaction: transaction,
       _scene: scene.toString(),
+      "appId": appId,
       "webPage": webPage,
       _thumbnail: thumbnail,
       _title: title,

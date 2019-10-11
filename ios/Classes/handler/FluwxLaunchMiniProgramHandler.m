@@ -16,6 +16,7 @@
 - (void)handleLaunchMiniProgram:(FlutterMethodCall *)call result:(FlutterResult)result {
     NSString *userName = call.arguments[@"userName"];
     NSString *path = call.arguments[@"path"];
+    NSString *appId = call.arguments[@"appId"];
 //    WXMiniProgramType *miniProgramType = call.arguments[@"miniProgramType"];
 
     NSNumber *typeInt = call.arguments[@"miniProgramType"];
@@ -27,6 +28,7 @@
     }
 
     BOOL done =  [WXApiRequestHandler launchMiniProgramWithUserName:userName
+                                        appId:appId
                                         path:path
                                         type:miniProgramType];
     result(@{fluwxKeyPlatform: fluwxKeyIOS, fluwxKeyResult: @(done)});

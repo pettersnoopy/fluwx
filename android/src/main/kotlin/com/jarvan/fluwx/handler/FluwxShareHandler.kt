@@ -91,7 +91,11 @@ internal class FluwxShareHandler {
         msg.mediaTagName = call.argument<String>(WechatPluginKeys.MEDIA_TAG_NAME)
 
         setCommonArguments(call, req, msg)
-        val done = WXAPiHandler.wxApi?.sendReq(req)
+
+        val appId = call.argument<String?>("appId") ?: ""
+        val wxApi = if (appId.isNullOrBlank()) WXAPiHandler.wxApi else WXAPiHandler.createWxApi(appId)
+
+        val done = wxApi?.sendReq(req)
         result.success(
                 mapOf(
                         WechatPluginKeys.PLATFORM to WechatPluginKeys.ANDROID,
@@ -123,7 +127,11 @@ internal class FluwxShareHandler {
             val req = SendMessageToWX.Req()
             setCommonArguments(call, req, msg)
             req.message = msg
-            val done = WXAPiHandler.wxApi?.sendReq(req)
+
+            val appId = call.argument<String?>("appId") ?: ""
+            val wxApi = if (appId.isNullOrBlank()) WXAPiHandler.wxApi else WXAPiHandler.createWxApi(appId)
+
+            val done = wxApi?.sendReq(req)
             result.success(
                     mapOf(
                             WechatPluginKeys.PLATFORM to WechatPluginKeys.ANDROID,
@@ -236,7 +244,11 @@ internal class FluwxShareHandler {
         val req = SendMessageToWX.Req()
         setCommonArguments(call, req, msg)
         req.message = msg
-        val done = WXAPiHandler.wxApi?.sendReq(req)
+
+        val appId = call.argument<String?>("appId") ?: ""
+        val wxApi = if (appId.isNullOrBlank()) WXAPiHandler.wxApi else WXAPiHandler.createWxApi(appId)
+
+        val done = wxApi?.sendReq(req)
         result.success(
                 mapOf(
                         WechatPluginKeys.PLATFORM to WechatPluginKeys.ANDROID,
@@ -270,7 +282,11 @@ internal class FluwxShareHandler {
             val req = SendMessageToWX.Req()
             setCommonArguments(call, req, msg)
             req.message = msg
-            val done = WXAPiHandler.wxApi?.sendReq(req)
+
+            val appId = call.argument<String?>("appId") ?: ""
+            val wxApi = if (appId.isNullOrBlank()) WXAPiHandler.wxApi else WXAPiHandler.createWxApi(appId)
+
+            val done = wxApi?.sendReq(req)
             result.success(
                     mapOf(
                             WechatPluginKeys.PLATFORM to WechatPluginKeys.ANDROID,
@@ -304,7 +320,11 @@ internal class FluwxShareHandler {
             val req = SendMessageToWX.Req()
             setCommonArguments(call, req, msg)
             req.message = msg
-            val done = WXAPiHandler.wxApi?.sendReq(req)
+
+            val appId = call.argument<String?>("appId") ?: ""
+            val wxApi = if (appId.isNullOrBlank()) WXAPiHandler.wxApi else WXAPiHandler.createWxApi(appId)
+
+            val done = wxApi?.sendReq(req)
             result.success(
                     mapOf(
                             WechatPluginKeys.PLATFORM to WechatPluginKeys.ANDROID,
@@ -333,7 +353,11 @@ internal class FluwxShareHandler {
             val req = SendMessageToWX.Req()
             setCommonArguments(call, req, msg)
             req.message = msg
-            val done = WXAPiHandler.wxApi?.sendReq(req)
+
+            val appId = call.argument<String?>("appId") ?: ""
+            val wxApi = if (appId.isNullOrBlank()) WXAPiHandler.wxApi else WXAPiHandler.createWxApi(appId)
+
+            val done = wxApi?.sendReq(req)
             result.success(
                     mapOf(
                             WechatPluginKeys.PLATFORM to WechatPluginKeys.ANDROID,

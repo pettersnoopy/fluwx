@@ -18,11 +18,13 @@
 #pragma mark - Public Methods
 
 + (BOOL)sendText:(NSString *)text
-         InScene:(enum WXScene)scene {
+         InScene:(enum WXScene)scene
+           AppId:(NSString *)appId {
     SendMessageToWXReq *req = [SendMessageToWXReq requestWithText:text
                                                    OrMediaMessage:nil
                                                             bText:YES
                                                           InScene:scene];
+    [WXApi registerApp:appID];
     return [WXApi sendReq:req];
 }
 
@@ -33,7 +35,8 @@
            ThumbImage:(UIImage *)thumbImage
               InScene:(enum WXScene)scene
                 title:(NSString *)title
-          description:(NSString *)description {
+          description:(NSString *)description
+                AppId:(NSString *)appId {
     WXImageObject *ext = [WXImageObject object];
     ext.imageData = imageData;
 
@@ -50,7 +53,7 @@
                                                    OrMediaMessage:message
                                                             bText:NO
                                                           InScene:scene];
-
+    [WXApi registerApp:appID];
     return [WXApi sendReq:req];
 }
 
@@ -61,7 +64,8 @@
          ThumbImage:(UIImage *)thumbImage
          MessageExt:(NSString *)messageExt
       MessageAction:(NSString *)messageAction
-            InScene:(enum WXScene)scene {
+            InScene:(enum WXScene)scene
+              AppId:(NSString *)appId {
     WXWebpageObject *ext = [WXWebpageObject object];
     ext.webpageUrl = urlString;
 
@@ -77,6 +81,7 @@
                                                    OrMediaMessage:message
                                                             bText:NO
                                                           InScene:scene];
+    [WXApi registerApp:appID];
     return [WXApi sendReq:req];
 }
 
@@ -90,7 +95,8 @@
           MessageExt:(NSString *)messageExt
        MessageAction:(NSString *)messageAction
              TagName:(NSString *)tagName
-             InScene:(enum WXScene)scene {
+             InScene:(enum WXScene)scene
+               AppId:(NSString *)appId {
     WXMusicObject *ext = [WXMusicObject object];
 
     if ([StringUtil isBlank:musicURL]) {
@@ -114,7 +120,7 @@
                                                    OrMediaMessage:message
                                                             bText:NO
                                                           InScene:scene];
-
+    [WXApi registerApp:appID];
     return [WXApi sendReq:req];
 }
 
@@ -126,7 +132,8 @@
           MessageExt:(NSString *)messageExt
        MessageAction:(NSString *)messageAction
              TagName:(NSString *)tagName
-             InScene:(enum WXScene)scene {
+             InScene:(enum WXScene)scene
+               AppId:(NSString *)appId {
     WXMediaMessage *message = [WXMediaMessage message];
     message.title = (title == (id) [NSNull null]) ? nil : title;
     message.description = (description == (id) [NSNull null]) ? nil : description;
@@ -147,6 +154,7 @@
                                                    OrMediaMessage:message
                                                             bText:NO
                                                           InScene:scene];
+    [WXApi registerApp:appID];
     return [WXApi sendReq:req];
 }
 
@@ -204,7 +212,8 @@
                        MessageExt:(NSString *)messageExt
                     MessageAction:(NSString *)messageAction
                           TagName:(NSString *)tagName
-                          InScene:(enum WXScene)scene {
+                          InScene:(enum WXScene)scene
+                            AppId:(NSString *)appId{
     WXMiniProgramObject *ext = [WXMiniProgramObject object];
     ext.webpageUrl = (webpageUrl == (id) [NSNull null]) ? nil : webpageUrl;
     ext.userName =(userName == (id) [NSNull null]) ? nil : userName ;
@@ -236,18 +245,19 @@
                                                    OrMediaMessage:message
                                                             bText:NO
                                                           InScene:scene];
-
+    [WXApi registerApp:appID];
     return [WXApi sendReq:req];
 }
 
 + (BOOL)launchMiniProgramWithUserName:(NSString *)userName
+                                 appId:(NSString *)appId
                                  path:(NSString *)path
                                  type:(WXMiniProgramType)miniProgramType {
     WXLaunchMiniProgramReq *launchMiniProgramReq = [WXLaunchMiniProgramReq object];
     launchMiniProgramReq.userName = userName;
     launchMiniProgramReq.path = (path == (id) [NSNull null]) ? nil : path;
     launchMiniProgramReq.miniProgramType = miniProgramType;
-
+    [WXApi registerApp:appID];
     return [WXApi sendReq:launchMiniProgramReq];
 }
 
@@ -320,12 +330,13 @@
 + (BOOL)sendAuthRequestScope:(NSString *)scope
                        State:(NSString *)state
                       OpenID:(NSString *)openID
+                      AppId:(NSString *)appId
             InViewController:(UIViewController *)viewController {
     SendAuthReq *req = [[SendAuthReq alloc] init];
     req.scope = scope; // @"post_timeline,sns"
     req.state = state;
     req.openID = openID;
-
+    [WXApi registerApp:appID];
     return [WXApi sendAuthReq:req
                viewController:viewController
                      delegate:[FluwxResponseHandler defaultManager]];
@@ -333,12 +344,13 @@
 
 + (BOOL)sendAuthRequestScope:(NSString *)scope
                        State:(NSString *)state
-                      OpenID:(NSString *)openID {
+                      OpenID:(NSString *)openID
+                       AppId:(NSString *)appId {
     SendAuthReq *req = [[SendAuthReq alloc] init];
     req.scope = scope; // @"post_timeline,sns"
     req.state = state;
     req.openID = openID;
-
+    [WXApi registerApp:appID];
     return [WXApi sendReq:req];
 }
 
@@ -400,10 +412,7 @@
     req.timeStamp = timestamp;
     req.package = package;
     req.sign = sign;
-    
-
-
-
+    [WXApi registerApp:appID];
     return [WXApi sendReq:req];
 }
 

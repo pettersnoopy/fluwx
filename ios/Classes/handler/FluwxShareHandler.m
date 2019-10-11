@@ -61,9 +61,10 @@ NSObject <FlutterPluginRegistrar> *_registrar;
 }
 
 - (void)shareText:(FlutterMethodCall *)call result:(FlutterResult)result {
+    NSString *appId = call.arguments[@"appId"];
     NSString *text = call.arguments[fluwxKeyText];
     NSString *scene = call.arguments[fluwxKeyScene];
-    BOOL done = [WXApiRequestHandler sendText:text InScene:[StringToWeChatScene toScene:scene]];
+    BOOL done = [WXApiRequestHandler sendText:text InScene:[StringToWeChatScene toScene:scene] AppId:appId];
     result(@{fluwxKeyPlatform: fluwxKeyIOS, fluwxKeyResult: @(done)});
 }
 
@@ -114,6 +115,7 @@ NSObject <FlutterPluginRegistrar> *_registrar;
                                                    InScene:[StringToWeChatScene toScene:scene]
                                                     title:call.arguments[fluwxKeyTitle]
                                                description:call.arguments[fluwxKeyDescription]
+                                                     AppId:call.arguments[@"appId"]
                                                 ];
             result(@{fluwxKeyPlatform: fluwxKeyIOS, fluwxKeyResult: @(done)});
 
@@ -159,6 +161,7 @@ NSObject <FlutterPluginRegistrar> *_registrar;
                                                    InScene:[StringToWeChatScene toScene:scene]
                                                      title:call.arguments[fluwxKeyTitle]
                                                description:call.arguments[fluwxKeyDescription]
+                                                     AppId:call.arguments[@"appId"]
             ];
             result(@{fluwxKeyPlatform: fluwxKeyIOS, fluwxKeyResult: @(done)});
 
@@ -203,7 +206,8 @@ NSObject <FlutterPluginRegistrar> *_registrar;
                                                  ThumbImage:thumbnailImage
                                                     InScene:[StringToWeChatScene toScene:scene]
                                                       title:call.arguments[fluwxKeyTitle]
-                                                description:call.arguments[fluwxKeyDescription]];
+                                                description:call.arguments[fluwxKeyDescription]
+                                                      AppId:call.arguments[@"appId"]];
             result(@{fluwxKeyPlatform: fluwxKeyIOS, fluwxKeyResult: @(done)});
 
         });
@@ -234,7 +238,8 @@ NSObject <FlutterPluginRegistrar> *_registrar;
                                               ThumbImage:thumbnailImage
                                               MessageExt:call.arguments[fluwxKeyMessageExt]
                                            MessageAction:call.arguments[fluwxKeyMessageAction]
-                                                 InScene:[StringToWeChatScene toScene:scene]];
+                                                 InScene:[StringToWeChatScene toScene:scene]
+                                                   AppId:call.arguments[@"appId"]];
             result(@{fluwxKeyPlatform: fluwxKeyIOS, fluwxKeyResult: @(done)});
 
         });
@@ -267,7 +272,8 @@ NSObject <FlutterPluginRegistrar> *_registrar;
                                                MessageExt:call.arguments[fluwxKeyMessageExt]
                                             MessageAction:call.arguments[fluwxKeyMessageAction]
                                                   TagName:call.arguments[fluwxKeyMediaTagName]
-                                                  InScene:[StringToWeChatScene toScene:scene]];
+                                                  InScene:[StringToWeChatScene toScene:scene]
+                                                    AppId:call.arguments[@"appId"]];
             result(@{fluwxKeyPlatform: fluwxKeyIOS, fluwxKeyResult: @(done)});
 
         });
@@ -297,7 +303,8 @@ NSObject <FlutterPluginRegistrar> *_registrar;
                                                MessageExt:call.arguments[fluwxKeyMessageExt]
                                             MessageAction:call.arguments[fluwxKeyMessageAction]
                                                   TagName:call.arguments[fluwxKeyMediaTagName]
-                                                  InScene:[StringToWeChatScene toScene:scene]];
+                                                  InScene:[StringToWeChatScene toScene:scene]
+                                                    AppId:call.arguments[@"appId"]];
             result(@{fluwxKeyPlatform: fluwxKeyIOS, fluwxKeyResult: @(done)});
 
         });
@@ -360,7 +367,8 @@ NSObject <FlutterPluginRegistrar> *_registrar;
                                                             MessageExt:call.arguments[fluwxKeyMessageExt]
                                                          MessageAction:call.arguments[fluwxKeyMessageAction]
                                                                TagName:call.arguments[fluwxKeyMediaTagName]
-                                                               InScene:[StringToWeChatScene toScene:scene]];
+                                                               InScene:[StringToWeChatScene toScene:scene]
+                                                                 AppId:call.arguments[@"appId"]];
             result(@{fluwxKeyPlatform: fluwxKeyIOS, fluwxKeyResult: @(done)});
 
         });

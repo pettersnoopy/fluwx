@@ -198,12 +198,16 @@ Future share(WeChatShareModel model) async {
 /// Once AuthCode got, you need to request Access_Token
 /// For more information please visit：
 /// * https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=open1419317851&token=
-Future sendAuth({String openId, @required String scope, String state}) async {
+Future sendAuth(
+    {String openId,
+    @required String scope,
+    String state,
+    @required String appId}) async {
   // "scope": scope, "state": state, "openId": openId
-
+  assert(appId != null && appId.isNotEmpty);
   assert(scope != null && scope.trim().isNotEmpty);
-  return await _channel.invokeMethod(
-      "sendAuth", {"scope": scope, "state": state, "openId": openId});
+  return await _channel.invokeMethod("sendAuth",
+      {"scope": scope, "state": state, "openId": openId, "appId": appId});
 }
 
 /// Sometimes WeChat  is not installed on users's devices.However we can
@@ -243,10 +247,11 @@ Future stopAuthByQRCode() async {
 /// see [WXMiniProgramType]
 Future launchMiniProgram(
     {@required String username,
-    String appId,
+    @required String appId,
     String path,
     WXMiniProgramType miniProgramType = WXMiniProgramType.RELEASE}) async {
   assert(username != null && username.trim().isNotEmpty);
+  assert(appId != null && appId.isNotEmpty);
   return await _channel.invokeMethod("launchMiniProgram", {
     "userName": username,
     "appId": appId,
@@ -282,6 +287,7 @@ Future pay(
     @required String sign,
     String signType,
     String extData}) async {
+  assert(appId != null && appId.isNotEmpty);
   return await _channel.invokeMethod("payWithFluwx", {
     "appId": appId,
     "partnerId": partnerId,
