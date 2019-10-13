@@ -24,7 +24,7 @@
                                                    OrMediaMessage:nil
                                                             bText:YES
                                                           InScene:scene];
-    [WXApi registerApp:appID];
+    [WXApi registerApp:appId];
     return [WXApi sendReq:req];
 }
 
@@ -53,7 +53,7 @@
                                                    OrMediaMessage:message
                                                             bText:NO
                                                           InScene:scene];
-    [WXApi registerApp:appID];
+    [WXApi registerApp:appId];
     return [WXApi sendReq:req];
 }
 
@@ -81,7 +81,7 @@
                                                    OrMediaMessage:message
                                                             bText:NO
                                                           InScene:scene];
-    [WXApi registerApp:appID];
+    [WXApi registerApp:appId];
     return [WXApi sendReq:req];
 }
 
@@ -120,7 +120,7 @@
                                                    OrMediaMessage:message
                                                             bText:NO
                                                           InScene:scene];
-    [WXApi registerApp:appID];
+    [WXApi registerApp:appId];
     return [WXApi sendReq:req];
 }
 
@@ -154,7 +154,7 @@
                                                    OrMediaMessage:message
                                                             bText:NO
                                                           InScene:scene];
-    [WXApi registerApp:appID];
+    [WXApi registerApp:appId];
     return [WXApi sendReq:req];
 }
 
@@ -245,7 +245,7 @@
                                                    OrMediaMessage:message
                                                             bText:NO
                                                           InScene:scene];
-    [WXApi registerApp:appID];
+    [WXApi registerApp:appId];
     return [WXApi sendReq:req];
 }
 
@@ -257,7 +257,7 @@
     launchMiniProgramReq.userName = userName;
     launchMiniProgramReq.path = (path == (id) [NSNull null]) ? nil : path;
     launchMiniProgramReq.miniProgramType = miniProgramType;
-    [WXApi registerApp:appID];
+    [WXApi registerApp:appId];
     return [WXApi sendReq:launchMiniProgramReq];
 }
 
@@ -336,7 +336,7 @@
     req.scope = scope; // @"post_timeline,sns"
     req.state = state;
     req.openID = openID;
-    [WXApi registerApp:appID];
+    [WXApi registerApp:appId];
     return [WXApi sendAuthReq:req
                viewController:viewController
                      delegate:[FluwxResponseHandler defaultManager]];
@@ -350,7 +350,7 @@
     req.scope = scope; // @"post_timeline,sns"
     req.state = state;
     req.openID = openID;
-    [WXApi registerApp:appID];
+    [WXApi registerApp:appId];
     return [WXApi sendReq:req];
 }
 
@@ -412,7 +412,7 @@
     req.timeStamp = timestamp;
     req.package = package;
     req.sign = sign;
-    [WXApi registerApp:appID];
+    [WXApi registerApp:appId];
     return [WXApi sendReq:req];
 }
 

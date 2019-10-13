@@ -13,7 +13,8 @@
 @interface WXApiRequestHandler : NSObject
 
 + (BOOL)sendText:(NSString *)text
-         InScene:(enum WXScene)scene;
+         InScene:(enum WXScene)scene
+           AppId:(NSString *)appId;
 
 + (BOOL)sendImageData:(NSData *)imageData
               TagName:(NSString *)tagName
@@ -22,7 +23,8 @@
            ThumbImage:(UIImage *)thumbImage
               InScene:(enum WXScene)scene
                 title:(NSString *)title
-          description:(NSString *)description;
+          description:(NSString *)description
+                AppId:(NSString *)appId;
 
 + (BOOL)sendLinkURL:(NSString *)urlString
             TagName:(NSString *)tagName
@@ -31,7 +33,8 @@
          ThumbImage:(UIImage *)thumbImage
          MessageExt:(NSString *)messageExt
       MessageAction:(NSString *)messageAction
-            InScene:(enum WXScene)scene;
+            InScene:(enum WXScene)scene
+              AppId:(NSString *)appId;
 
 + (BOOL)sendMusicURL:(NSString *)musicURL
              dataURL:(NSString *)dataURL
@@ -43,7 +46,8 @@
           MessageExt:(NSString *)messageExt
        MessageAction:(NSString *)messageAction
              TagName:(NSString *)tagName
-             InScene:(enum WXScene)scene;
+             InScene:(enum WXScene)scene
+               AppId:(NSString *)appId;
 
 + (BOOL)sendVideoURL:(NSString *)videoURL
      VideoLowBandUrl:(NSString *)videoLowBandUrl
@@ -53,7 +57,8 @@
           MessageExt:(NSString *)messageExt
        MessageAction:(NSString *)messageAction
              TagName:(NSString *)tagName
-             InScene:(enum WXScene)scene;
+             InScene:(enum WXScene)scene
+               AppId:(NSString *)appId;
 
 + (BOOL)sendEmotionData:(NSData *)emotionData
              ThumbImage:(UIImage *)thumbImage
@@ -78,9 +83,11 @@
                        MessageExt:(NSString *)messageExt
                     MessageAction:(NSString *)messageAction
                           TagName:(NSString *)tagName
-                          InScene:(enum WXScene)scene;
+                          InScene:(enum WXScene)scene
+                            AppId:(NSString *)appId;
 
 + (BOOL)launchMiniProgramWithUserName:(NSString *)userName
+                                appId:(NSString *)appId
                                  path:(NSString *)path
                                  type:(WXMiniProgramType)miniProgramType;
 
@@ -99,11 +106,13 @@
 + (BOOL)sendAuthRequestScope:(NSString *)scope
                        State:(NSString *)state
                       OpenID:(NSString *)openID
+                       AppId:(NSString *)appId
             InViewController:(UIViewController *)viewController;
 
 + (BOOL)sendAuthRequestScope:(NSString *)scope
                        State:(NSString *)state
-                      OpenID:(NSString *)openID;
+                      OpenID:(NSString *)openID
+                       AppId:(NSString *)appId;
 
 
 + (BOOL)openProfileWithAppID:(NSString *)appID

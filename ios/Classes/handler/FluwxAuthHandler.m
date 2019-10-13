@@ -27,8 +27,8 @@ FlutterMethodChannel *_fluwxMethodChannel = nil;
     NSString *appId = call.arguments[@"appId"];
     BOOL done = [WXApiRequestHandler sendAuthRequestScope:call.arguments[@"scope"]
                                                     State:(call.arguments[@"state"] == (id) [NSNull null]) ? nil : call.arguments[@"state"]
-                                                   OpenID:(openId == (id) [NSNull null]) ? nil : openId]
-                                                    AppId:appId;
+                                                   OpenID:(openId == (id) [NSNull null]) ? nil : openId
+                                                    AppId:appId];
     result(@(done));
 }
 
