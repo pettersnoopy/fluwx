@@ -54,9 +54,9 @@ object WXAPiHandler {
             return
         }
 
-        val enableMTA = call.argument<Boolean>("enableMTA")!!;
+        val checkSignature = call.argument<Boolean>("checkSignature")!!
 
-        val api = createWxApi(appId, enableMTA)
+        val api = createWxApi(appId, checkSignature)
         val registered = api.registerApp(appId)
         wxApi = api
         result.success(mapOf(
@@ -65,8 +65,8 @@ object WXAPiHandler {
         ))
     }
 
-    fun createWxApi(appId: String, enableMTA: Boolean? = false): IWXAPI {
-        return WXAPIFactory.createWXAPI(registrar!!.context().applicationContext, appId, enableMTA ?: false)
+    fun createWxApi(appId: String, checkSignature: Boolean? = false): IWXAPI {
+        return WXAPIFactory.createWXAPI(registrar!!.context().applicationContext, appId, checkSignature ?: false)
     }
 
     fun checkWeChatInstallation(result: MethodChannel.Result) {

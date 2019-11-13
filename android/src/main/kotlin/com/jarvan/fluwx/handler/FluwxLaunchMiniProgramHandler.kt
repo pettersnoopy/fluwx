@@ -22,6 +22,7 @@ internal class FluwxLaunchMiniProgramHandler {
         }// 可选打开 开发版，体验版和正式版
 
         val wxApi = if (appId.isNullOrBlank()) WXAPiHandler.wxApi else WXAPiHandler.createWxApi(appId)
+        wxApi?.openWXApp()
         val done = wxApi?.sendReq(req)
         result.success(mapOf(
                 WechatPluginKeys.PLATFORM to WechatPluginKeys.ANDROID,
